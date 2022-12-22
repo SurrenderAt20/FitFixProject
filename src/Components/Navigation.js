@@ -4,9 +4,7 @@ import logo from "./img/logo.svg";
 export const Navigation = () => {
   return (
     <div>
-      {/* Navbar */}
-      <div className="relative container mx-auto p-6">
-        {/* flexContainer */}
+      <div className="relative container mx-auto p-6 border-b-2 border-darkGrayishBlue">
         <div className="flex items-center justify-between">
           <div className="pt-2">
             <img src={logo} alt="Logo"></img>
@@ -14,16 +12,10 @@ export const Navigation = () => {
 
           <div className="hidden md:flex space-x-6 font-semibold">
             <a href="" className="hover:text-darkGrayishBlue">
-              Pricing
-            </a>
-            <a href="" className="hover:text-darkGrayishBlue">
               Product
             </a>
             <a href="" className="hover:text-darkGrayishBlue">
               About
-            </a>
-            <a href="" className="hover:text-darkGrayishBlue">
-              Careers
             </a>
             <a href="" className="hover:text-darkGrayishBlue">
               Community
