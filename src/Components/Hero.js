@@ -15,12 +15,12 @@ export const Hero = () => {
       <section id="hero">
         <div className="container flex flex-col-reverse md:flex-row items-center px-6 mx-auto mt-10 space-y-0 md:space-y-0">
           <div className="flex flex-col mb-28 space-y-12 md:w-1/2">
-            <h1 className="max-w-md text-4xl font-bold text-center md:text-5xl md:text-left">
+            <h1 className="max-w-md text-4xl font-bold text-headlineDark text-center md:text-5xl md:text-left">
               Inspire and encourage to build a better future
             </h1>
             <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-              FitFlix is a platform which makes workouts easier than ever
-              before. Make your program and go to work with your friends.
+              FitFix is a platform which makes workouts easier than ever before.
+              Make your program and go to work with your friends.
             </p>
             <div className="flex justify-center md:justify-start">
               <a
@@ -39,13 +39,13 @@ export const Hero = () => {
       <section id="features">
         <div className="container flex flex-col px-4 mx-auto mt-10 space-y-12 md:space-y-0 md:flex-row">
           <div className="flex flex-col space-y-12 md:w-1/2">
-            <h2 className="max-w-md text-4xl font-bold text-center md:text-left">
-              What's different about Manage ?
+            <h2 className="max-w-md text-4xl font-bold text-center text-headlineDark md:text-left">
+              What's different about FitFix ?
             </h2>
             <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
               Sick of paywalls and restrictions by expensive applications?
-              FitFlix is free and open source and is in a segment of first
-              movers when it comes to making social initiatives within fitness!
+              FitFix is free and open source and is in a segment of first movers
+              when it comes to making social initiatives within fitness!
             </p>
           </div>
 
@@ -56,14 +56,14 @@ export const Hero = () => {
                   <div class="px-4 py-2 text-white rounded-full md:py-1 bg-brightRed">
                     01
                   </div>
-                  <h3 class="text-base font-bold md:mb-4 md:hidden">
+                  <h3 class="text-base font-bold md:mb-4 md:hidden text-headlineDark">
                     Track company-wide progress
                   </h3>
                 </div>
               </div>
 
               <div>
-                <h3 class="hidden mb-4 text-lg font-bold md:block">
+                <h3 class="hidden mb-4 text-lg font-bold md:block text-headlineDark">
                   Track fitness progress
                 </h3>
                 <p class="text-darkGrayishBlue">
@@ -80,14 +80,14 @@ export const Hero = () => {
                   <div class="px-4 py-2 text-white rounded-full md:py-1 bg-brightRed">
                     02
                   </div>
-                  <h3 class="text-base font-bold md:mb-4 md:hidden">
+                  <h3 class="text-base text-headlineDark font-bold md:mb-4 md:hidden">
                     Advanced fitness programs
                   </h3>
                 </div>
               </div>
 
               <div>
-                <h3 class="hidden mb-4 text-lg font-bold md:block">
+                <h3 class="hidden mb-4 text-lg text-headlineDark font-bold md:block">
                   Advanced fitness programs
                 </h3>
                 <p class="text-darkGrayishBlue">
@@ -104,14 +104,14 @@ export const Hero = () => {
                   <div class="px-4 py-2 text-white rounded-full md:py-1 bg-brightRed">
                     03
                   </div>
-                  <h3 class="text-base font-bold md:mb-4 md:hidden">
+                  <h3 class="text-base text-headlineDark font-bold md:mb-4 md:hidden">
                     Advanced fitness programs
                   </h3>
                 </div>
               </div>
 
               <div>
-                <h3 class="hidden mb-4 text-lg font-bold md:block">
+                <h3 class="hidden mb-4 text-lg text-headlineDark font-bold md:block">
                   Advanced fitness programs
                 </h3>
                 <p class="text-darkGrayishBlue">
@@ -125,7 +125,7 @@ export const Hero = () => {
         </div>
         <section id="testimonials">
           <div class="max-w-6xl px-5 mx-auto mt-32 text-center">
-            <h2 class="text-4xl font-bold text-center">
+            <h2 class="text-4xl font-bold text-center text-headlineDark">
               You Asked, We Delivered
             </h2>
             <p class=" text-darkGrayishBlue mt-4">
@@ -134,7 +134,7 @@ export const Hero = () => {
             <div class="flex flex-col mt-24 md:flex-row md:space-x-6">
               <div class="flex flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:w-1/3">
                 <img src={myAvatar} class="w-16 -mt-14" alt="" />
-                <h5 class="text-lg font-bold">Anisha Li</h5>
+                <h5 class="text-lg font-bold">Anna</h5>
                 <p class="text-sm text-darkGrayishBlue">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -143,7 +143,7 @@ export const Hero = () => {
               </div>
               <div class="hidden flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:flex md:w-1/3">
                 <img src={anna} class="w-16 -mt-14" alt="" />
-                <h5 class="text-lg font-bold">Ali Bravo</h5>
+                <h5 class="text-lg font-bold">Rikke</h5>
                 <p class="text-sm text-darkGrayishBlue">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -152,7 +152,7 @@ export const Hero = () => {
               </div>
               <div class="hidden flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:flex md:w-1/3">
                 <img src={victor} class="w-16 -mt-14" alt="" />
-                <h5 class="text-lg font-bold">Richard Watts</h5>
+                <h5 class="text-lg font-bold">Mads</h5>
                 <p class="text-sm text-darkGrayishBlue">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -224,7 +224,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          <div class="flex flex-col justify-between"></div>
+          {/* <div class="flex flex-col justify-between"></div> */}
         </div>
       </footer>
     </div>

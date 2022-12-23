@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "./img/logo.svg";
+import logo from "./img/GartnerPaint.png";
+import "./Navigation.css";
 
 export const Navigation = () => {
   return (
@@ -7,7 +8,7 @@ export const Navigation = () => {
       <div className="relative container mx-auto p-6 border-b-2 border-darkGrayishBlue">
         <div className="flex items-center justify-between">
           <div className="pt-2">
-            <img src={logo} alt="Logo"></img>
+            <img className="img-responsive" src={logo} alt="Logo"></img>
           </div>
 
           <div className="hidden md:flex space-x-6 font-semibold">
