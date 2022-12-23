@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./img/GartnerPaint.png";
+import logo from "../Screens/img/GartnerPaint.png";
 import "./Navigation.css";
 
 export const Navigation = () => {
@@ -10,9 +10,8 @@ export const Navigation = () => {
           <div className="pt-2">
             <img className="img-responsive" src={logo} alt="Logo"></img>
           </div>
-
           <div className="hidden md:flex space-x-6 font-semibold">
-            <a href="" className="hover:text-darkGrayishBlue">
+            <a href="/product" className="hover:text-darkGrayishBlue">
               Product
             </a>
             <a href="" className="hover:text-darkGrayishBlue">

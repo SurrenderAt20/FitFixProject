@@ -1,13 +1,15 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { Navigation } from "./Components/Navigation";
-import { Hero } from "./Components/Hero";
+import { Route, Routes } from "react-router-dom";
+import { Hero } from "./Screens/Hero";
+import { Product } from "./Screens/Product";
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <Hero />
+      <Routes>
+        <Route path="/" element={<Hero />} />
+        <Route path="/product" element={<Product />} />
+      </Routes>
     </div>
   );
 }
