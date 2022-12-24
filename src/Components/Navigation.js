@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../Screens/img/GartnerPaint.png";
 import "./Navigation.css";
 
@@ -11,22 +12,25 @@ export const Navigation = () => {
             <img className="img-responsive" src={logo} alt="Logo"></img>
           </div>
           <div className="hidden md:flex space-x-6 font-semibold">
-            <a href="/product" className="hover:text-darkGrayishBlue">
+            <Link to="/" className="hover:text-darkGrayishBlue">
+              Home
+            </Link>
+            <Link to="/product" className="hover:text-darkGrayishBlue">
               Product
-            </a>
-            <a href="" className="hover:text-darkGrayishBlue">
+            </Link>
+            <Link to="/about" className="hover:text-darkGrayishBlue">
               About
-            </a>
-            <a href="" className="hover:text-darkGrayishBlue">
+            </Link>
+            <Link to="/community" className="hover:text-darkGrayishBlue">
               Community
-            </a>
+            </Link>
           </div>
-          <a
-            href=""
+          <Link
+            to=""
             className="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </div>
