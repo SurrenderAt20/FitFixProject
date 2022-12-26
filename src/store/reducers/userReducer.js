@@ -1,5 +1,3 @@
-import { LOGIN, SIGNUP, LOGOUT } from "../actions/userActions";
-
 const initialState = {
   loading: false,
   error: "",

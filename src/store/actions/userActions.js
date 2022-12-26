@@ -1,5 +1,4 @@
 import { Signup } from "../../Screens/Signup";
-import axios from "axios";
 
 export const signup = (email, password) => {
   return async (dispatch) => {
@@ -18,7 +17,7 @@ export const signup = (email, password) => {
     const data = await response.json(); // json to ES;
     console.log(data);
     if (!response.ok) {
-      //there was an error
+      console.log("Error detected");
     } else {
       dispatch({ type: "SIGNUP_SUCCESS", payload: response.data });
     }
