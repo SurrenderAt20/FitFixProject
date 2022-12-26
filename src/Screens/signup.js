@@ -1,8 +1,40 @@
 import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signup } from "../store/actions/userActions";
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
 
 export const Signup = () => {
+  const [userInput, setUserInput] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+
+  const changeHandler = (event) => {
+    setUserInput((prevState) => {
+      const inputValue = event.target.value;
+      const inputName = event.target.name;
+
+      return { ...prevState, [inputName]: inputValue };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    dispatch(signup(email, password));
+  };
+
   return (
     <div>
       <section id="signup">
@@ -17,12 +49,18 @@ export const Signup = () => {
               Make your program and go to work with your friends.
             </p>
           </div>
-          <form className="w-full max-w-md mb-28 xl:mr-40">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col w-full max-w-md mb-28 xl:mr-40"
+          >
             <div className="flex items-center border-b border-gray-500 py-2">
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="text"
+                value={userInput.firstName}
                 placeholder="First Name"
+                name="firstName"
+                onChange={changeHandler}
                 aria-label="First Name"
               />
             </div>
@@ -30,7 +68,10 @@ export const Signup = () => {
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="text"
+                value={userInput.lastName}
+                onChange={changeHandler}
                 placeholder="Last Name"
+                name="lastName"
                 aria-label="Last Name"
               />
             </div>
@@ -38,7 +79,10 @@ export const Signup = () => {
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="email"
+                value={userInput.email}
+                onChange={changeHandler}
                 placeholder="Email Address"
+                name="email"
                 aria-label="Email Address"
               />
             </div>
@@ -46,7 +90,10 @@ export const Signup = () => {
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="password"
+                value={userInput.password}
+                onChange={changeHandler}
                 placeholder="Password"
+                name="password"
                 aria-label="Password"
               />
             </div>
@@ -54,7 +101,10 @@ export const Signup = () => {
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="password"
+                value={userInput.confirmPassword}
+                onChange={changeHandler}
                 placeholder="Confirm Password"
+                name="confirmPassword"
                 aria-label="Confirm Password"
               />
             </div>
@@ -62,6 +112,7 @@ export const Signup = () => {
               <button
                 className="md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
                 type="submit"
+                name="submitBtn"
               >
                 Sign up
               </button>
