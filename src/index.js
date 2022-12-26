@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 import userReducer from "./store/reducers/userReducer";
 import "./index.css";
@@ -11,7 +12,7 @@ const rootReducer = combineReducers({
   user: userReducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
