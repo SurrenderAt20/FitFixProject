@@ -28,11 +28,11 @@ export const Signup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
+    if (userInput.password !== userInput.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-    dispatch(signup(email, password));
+    dispatch(signup(userInput.email, userInput.password));
   };
 
   return (

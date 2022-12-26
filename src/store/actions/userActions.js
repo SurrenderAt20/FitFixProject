@@ -1,8 +1,5 @@
 import { Signup } from "../../Screens/Signup";
 import axios from "axios";
-export const LOGIN = "LOGIN";
-export const SIGNUP = "SIGNUP";
-export const LOGOUT = "LOGOUT";
 
 export const signup = (email, password) => {
   return async (dispatch) => {
