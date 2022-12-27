@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signup } from "../store/actions/userActions";
@@ -7,13 +8,14 @@ import { Footer } from "../Components/Footer";
 
 export const Signup = () => {
   const [userInput, setUserInput] = useState({
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -28,11 +30,43 @@ export const Signup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (userInput.firstname.length < 2) {
+      console.log("Character issue");
+      setError("Character issue");
+      return;
+    }
+
+    if (userInput.lastname.length < 2) {
+      console.log("Character issue");
+      setError("Character issue");
+      return;
+    }
+
+    if (userInput.password.length < 8) {
+      console.log("Passwords issue");
+      setError("Character issue");
+      return;
+    }
+
     if (userInput.password !== userInput.confirmPassword) {
+      console.log("Passwords issue");
       setError("Passwords do not match");
       return;
     }
-    dispatch(signup(userInput.email, userInput.password));
+
+    dispatch(
+      signup(
+        userInput.firstname,
+        userInput.lastname,
+        userInput.email,
+        userInput.password
+      )
+    );
+
+    navigate("/?SuccessOnSignup", {
+      message: "You have successfully signed up!",
+    });
   };
 
   return (
@@ -59,7 +93,7 @@ export const Signup = () => {
                 type="text"
                 value={userInput.firstName}
                 placeholder="First Name"
-                name="firstName"
+                name="firstname"
                 onChange={changeHandler}
                 aria-label="First Name"
               />
@@ -71,7 +105,7 @@ export const Signup = () => {
                 value={userInput.lastName}
                 onChange={changeHandler}
                 placeholder="Last Name"
-                name="lastName"
+                name="lastname"
                 aria-label="Last Name"
               />
             </div>

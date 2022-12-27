@@ -1,14 +1,14 @@
-import { Signup } from "../../Screens/Signup";
-
-export const signup = (email, password) => {
+export const signup = (firstname, lastname, email, password) => {
   return async (dispatch) => {
-    const response = await fetch("/api/signup", {
+    const response = await fetch("http://localhost:3001/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
 
       body: JSON.stringify({
+        firstname: firstname,
+        lastname: lastname,
         email: email,
         password: password,
       }),
@@ -17,9 +17,9 @@ export const signup = (email, password) => {
     const data = await response.json(); // json to ES;
     console.log(data);
     if (!response.ok) {
-      console.log("Error detected");
+      dispatch({ type: "SIGNUP_ERROR", payload: data.error });
     } else {
-      dispatch({ type: "SIGNUP_SUCCESS", payload: response.data });
+      dispatch({ type: "SIGNUP_SUCCESS", payload: data });
     }
   };
 };
