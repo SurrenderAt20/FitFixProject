@@ -83,3 +83,53 @@ app.post(
     });
   }
 );
+
+app.post(
+  "/login",
+  [
+    check("email").isEmail().withMessage("Please enter a valid email"),
+    check("password")
+      .isLength({ min: 8 })
+      .withMessage("Please enter a valid password"),
+  ],
+  async (req, res) => {
+    // Validate the request body
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Destructure the request body
+    const { email, password } = req.body;
+
+    // Define the query string
+    const query = "SELECT * FROM users WHERE email = ?";
+
+    // Execute the query and handle the results
+    connection.query(query, [email], async (error, results) => {
+      if (error) {
+        console.error("Error fetching user from database: ", error);
+        return res.status(500).send("Error fetching user from database");
+      }
+      if (results.length === 0) {
+        return res.status(401).send("Invalid email or password");
+      }
+
+      // Compare the provided password with the hashed password in the database
+      const validPassword = await bcrypt.compare(password, results[0].password);
+      if (!validPassword) {
+        return res.status(401).send("Invalid email or password");
+      }
+
+      const secretOrPrivateKey = "copenhagen";
+
+      // Generate a JWT with the user ID as the payload
+      const token = jwt.sign({ userId: results[0].id }, secretOrPrivateKey, {
+        expiresIn: "1h",
+      });
+
+      // Send the JWT to the client
+      res.json({ token });
+    });
+  }
+);

@@ -73,7 +73,7 @@ export const Signup = () => {
     <div>
       <section id="signup">
         <Navigation />
-        <div className="container flex flex-col md:justify-between md:flex-row px-6 mx-auto mt-10 lg:space-x-20 md:space-x-10 space-y-0 md:space-y-0">
+        <div className="container flex flex-col mx-auto md:justify-between md:flex-row px-6 mt-10 lg:space-x-20 md:space-x-10 space-y-0 md:space-y-0">
           <div className="flex flex-col mb-28 space-y-12 xl:ml-40">
             <h1 className="max-w-md text-4xl font-bold text-headlineDark xl:text-center md:text-5xl">
               Ready to start your journey ?
@@ -85,7 +85,7 @@ export const Signup = () => {
           </div>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col w-full max-w-md mb-28 xl:mr-40"
+            className="flex flex-col w-full max-w-md mb-28 mx-auto xl:mx-auto xl:mr-40"
           >
             <div className="flex items-center border-b border-gray-500 py-2">
               <input
