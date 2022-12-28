@@ -28,7 +28,7 @@ export const signup = (firstname, lastname, email, password) => {
 
 export const login = (email, password) => {
   return async (dispatch) => {
-    const response = await fetch("http://localhost:3001/signup", {
+    const response = await fetch("http://localhost:3001/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
