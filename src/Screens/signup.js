@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signup, login } from "../store/actions/userActions";
@@ -15,8 +15,9 @@ export const Signup = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
-  /*   const [formType, setFormType] = useState("signup"); */
+  const [formType, setFormType] = useState("signup");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -50,11 +51,11 @@ export const Signup = () => {
       return;
     }
 
-    /*     if (userInput.password !== userInput.confirmPassword) {
+    if (userInput.password !== userInput.confirmPassword) {
       console.log("Passwords do not match");
       setError("Passwords do not match");
       return;
-    } */
+    }
 
     dispatch(
       signup(
@@ -79,13 +80,13 @@ export const Signup = () => {
     dispatch(login(userInput.email, userInput.password));
   };
 
-  /*   const toggleForm = () => {
+  const toggleForm = () => {
     if (formType === "signup") {
       setFormType("login");
     } else {
       setFormType("signup");
     }
-  }; */
+  };
 
   return (
     <div>
@@ -101,78 +102,120 @@ export const Signup = () => {
               Make your program and go to work with your friends.
             </p>
           </div>
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col w-full max-w-md mb-28 mx-auto xl:mx-auto xl:mr-40"
-          >
-            <div className="flex items-center border-b border-gray-500 py-2">
-              <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="text"
-                value={userInput.firstname}
-                placeholder="First Name"
-                name="firstname"
-                onChange={changeHandler}
-                aria-label="First Name"
-              />
-            </div>
-            <div className="flex items-center border-b border-gray-500 py-2 mt-8">
-              <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="text"
-                value={userInput.lastname}
-                onChange={changeHandler}
-                placeholder="Last Name"
-                name="lastname"
-                aria-label="Last Name"
-              />
-            </div>
-            <div className="flex items-center border-b border-gray-500 py-2 mt-8">
-              <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="email"
-                value={userInput.email}
-                onChange={changeHandler}
-                placeholder="Email Address"
-                name="email"
-                aria-label="Email Address"
-              />
-            </div>
-            <div className="flex items-center border-b border-gray-500 py-2 mt-8">
-              <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="text"
-                value={userInput.password}
-                onChange={changeHandler}
-                placeholder="Password"
-                name="password"
-                aria-label="Password"
-              />
-            </div>
-            <div className="flex items-center border-b border-gray-500 py-2 mt-8">
-              <input
-                className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="text"
-                value={userInput.confirmPassword}
-                onChange={changeHandler}
-                placeholder="Confirm Password"
-                name="confirmPassword"
-                aria-label="Confirm Password"
-              />
-            </div>
-            <div className="mt-8 mb-8">
-              <button
-                className="md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
-                type="submit"
-                name="submitBtn"
-              >
-                Sign up
-              </button>
-            </div>
-            {/*             <a className="flex mb-14 text-headlineDark" onClick={toggleForm}>
-              Already signed up? Click to log in
-            </a> */}
-          </form>
+          {formType === "signup" ? (
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col w-full max-w-md mb-28 mx-auto xl:mx-auto xl:mr-40"
+            >
+              <div className="flex items-center border-b border-gray-500 py-2">
+                <input
+                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  value={userInput.firstname}
+                  placeholder="First Name"
+                  name="firstname"
+                  onChange={changeHandler}
+                  aria-label="First Name"
+                />
+              </div>
+              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+                <input
+                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  type="text"
+                  value={userInput.lastname}
+                  onChange={changeHandler}
+                  placeholder="Last Name"
+                  name="lastname"
+                  aria-label="Last Name"
+                />
+              </div>
+              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+                <input
+                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  type="email"
+                  value={userInput.email}
+                  onChange={changeHandler}
+                  placeholder="Email Address"
+                  name="email"
+                  aria-label="Email Address"
+                />
+              </div>
+              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+                <input
+                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  type="password"
+                  value={userInput.password}
+                  onChange={changeHandler}
+                  placeholder="Password"
+                  name="password"
+                  aria-label="Password"
+                />
+              </div>
+              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+                <input
+                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  type="password"
+                  value={userInput.confirmPassword}
+                  onChange={changeHandler}
+                  placeholder="Confirm Password"
+                  name="confirmPassword"
+                  aria-label="Confirm Password"
+                />
+              </div>
+              <div className="mt-8 mb-8">
+                <button
+                  className="md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+                  type="submit"
+                  name="submitBtn"
+                >
+                  Sign up
+                </button>
+              </div>
+              <a className="flex mb-14 text-headlineDark" onClick={toggleForm}>
+                Already signed up? Click to log in
+              </a>
+            </form>
+          ) : (
+            <form
+              onSubmit={handleLogin}
+              className="flex flex-col w-full max-w-md mb-28 mx-auto xl:mx-auto xl:mr-40"
+            >
+              <div className="flex items-center border-b border-gray-500 py-2">
+                <input
+                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  type="email"
+                  value={userInput.email}
+                  placeholder="Email Address"
+                  name="email"
+                  onChange={changeHandler}
+                  aria-label="email"
+                />
+              </div>
+              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+                <input
+                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  type="password"
+                  value={userInput.password}
+                  onChange={changeHandler}
+                  placeholder="Password"
+                  name="password"
+                  aria-label="Password"
+                />
+              </div>
+              <div className="mt-8 mb-8">
+                <button
+                  className="md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+                  type="submit"
+                  name="submitBtn"
+                >
+                  Log in
+                </button>
+              </div>
+              <a className="flex mb-36 text-headlineDark" onClick={toggleForm}>
+                Not signed up yet? Click to sign up
+              </a>
+            </form>
+          )}
         </div>
         <Footer />
       </section>

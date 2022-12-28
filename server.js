@@ -3,6 +3,7 @@ const app = express();
 const mysql2 = require("mysql2");
 const connectionDetails = require("./database");
 const jwt = require("jsonwebtoken");
+const jwtDecode = require("jwt-decode");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const { check, validationResult } = require("express-validator");
@@ -89,6 +90,28 @@ app.post(
 
 app.post(
   "/login",
+  async (req, res, next) => {
+    // Check for the presence of a JWT in the Authorization header
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(401).send("Access denied. No token provided.");
+    }
+
+    // Verify the JWT and decode the payload
+    try {
+      const decoded = jwtDecode(token);
+
+      // Check if the JWT has expired
+      if (decoded.exp < Date.now() / 1000) {
+        return res.status(401).send("Token has expired");
+      }
+
+      req.user = decoded;
+      next();
+    } catch (error) {
+      return res.status(400).send("Invalid token");
+    }
+  },
   [
     check("email").isEmail().withMessage("Please enter a valid email"),
     check("password")
@@ -124,15 +147,12 @@ app.post(
         return res.status(401).send("Invalid email or password");
       }
 
+      // If the email and password are correct, generate a new JWT and send it to the client
       const secretOrPrivateKey = "copenhagen";
-
-      // Generate a JWT with the user ID as the payload
-      const token = jwt.sign({ userId: results[0].id }, secretOrPrivateKey, {
+      const newToken = jwt.sign({ userId: results[0].id }, secretOrPrivateKey, {
         expiresIn: "1h",
       });
-
-      // Send the JWT to the client
-      res.json({ token });
+      res.json({ token: newToken });
     });
   }
 );
