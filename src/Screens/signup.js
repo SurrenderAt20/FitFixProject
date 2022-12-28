@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { signup } from "../store/actions/userActions";
+import { signup, login } from "../store/actions/userActions";
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
 
@@ -15,6 +15,7 @@ export const Signup = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  /*   const [formType, setFormType] = useState("signup"); */
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -49,25 +50,42 @@ export const Signup = () => {
       return;
     }
 
-    if (userInput.password !== userInput.confirmPassword) {
-      console.log("Passwords issue");
+    /*     if (userInput.password !== userInput.confirmPassword) {
+      console.log("Passwords do not match");
       setError("Passwords do not match");
       return;
-    }
+    } */
 
     dispatch(
       signup(
         userInput.firstname,
         userInput.lastname,
         userInput.email,
-        userInput.password
+        userInput.password,
+        userInput.confirmPassword
       )
     );
-
-    navigate("/?SuccessOnSignup", {
-      message: "You have successfully signed up!",
-    });
   };
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    if (userInput.password.length < 8) {
+      console.log("Passwords issue");
+      setError("Character issue");
+      return;
+    }
+
+    dispatch(login(userInput.email, userInput.password));
+  };
+
+  /*   const toggleForm = () => {
+    if (formType === "signup") {
+      setFormType("login");
+    } else {
+      setFormType("signup");
+    }
+  }; */
 
   return (
     <div>
@@ -91,7 +109,7 @@ export const Signup = () => {
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="text"
-                value={userInput.firstName}
+                value={userInput.firstname}
                 placeholder="First Name"
                 name="firstname"
                 onChange={changeHandler}
@@ -102,7 +120,7 @@ export const Signup = () => {
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                 type="text"
-                value={userInput.lastName}
+                value={userInput.lastname}
                 onChange={changeHandler}
                 placeholder="Last Name"
                 name="lastname"
@@ -123,7 +141,7 @@ export const Signup = () => {
             <div className="flex items-center border-b border-gray-500 py-2 mt-8">
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="password"
+                type="text"
                 value={userInput.password}
                 onChange={changeHandler}
                 placeholder="Password"
@@ -134,7 +152,7 @@ export const Signup = () => {
             <div className="flex items-center border-b border-gray-500 py-2 mt-8">
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-                type="password"
+                type="text"
                 value={userInput.confirmPassword}
                 onChange={changeHandler}
                 placeholder="Confirm Password"
@@ -151,6 +169,9 @@ export const Signup = () => {
                 Sign up
               </button>
             </div>
+            {/*             <a className="flex mb-14 text-headlineDark" onClick={toggleForm}>
+              Already signed up? Click to log in
+            </a> */}
           </form>
         </div>
         <Footer />
