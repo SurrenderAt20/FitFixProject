@@ -51,6 +51,7 @@ export const login = (email, password) => {
     if (!response.ok) {
       dispatch({ type: "LOGIN_ERROR", payload: data.error });
     } else {
+      localStorage.setItem("token", data.token);
       dispatch({
         type: "LOGIN_SUCCESS",
         payload: data,
