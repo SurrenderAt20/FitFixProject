@@ -47,6 +47,9 @@ app.post(
   ],
   async (req, res) => {
     // Validate the request body
+    console.log(`Password: ${req.body.password}`);
+    console.log(`Confirm Password: ${req.body.confirmPassword}`);
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

@@ -1,6 +1,12 @@
 import React from "react";
 
-export const signup = (firstname, lastname, email, password) => {
+export const signup = (
+  firstname,
+  lastname,
+  email,
+  password,
+  confirmPassword
+) => {
   return async (dispatch) => {
     const response = await fetch("http://localhost:3001/signup", {
       method: "POST",
@@ -13,6 +19,7 @@ export const signup = (firstname, lastname, email, password) => {
         lastname: lastname,
         email: email,
         password: password,
+        confirmPassword: confirmPassword,
       }),
     });
 
