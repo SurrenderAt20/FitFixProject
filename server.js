@@ -185,3 +185,32 @@ app.get("/protected", (req, res) => {
   // The req.user object contains the user information extracted from the JWT
   res.send(`Welcome, ${req.user.name}`);
 });
+
+app.post("/verify", async (req, res) => {
+  // Check for the presence of a JWT in the Authorization header
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).send("Access denied. No token provided.");
+  }
+
+  // Verify the JWT and decode the payload
+  try {
+    const decoded = jwtDecode(token);
+
+    // Check if the JWT has expired
+    if (decoded.exp < Date.now() / 1000) {
+      return res.status(401).send("Token has expired");
+    }
+
+    // If the JWT is still valid, generate a new JWT with a refreshed expiration time
+    const secretOrPrivateKey = "copenhagen";
+    const newToken = jwt.sign({ userId: decoded.userId }, secretOrPrivateKey, {
+      expiresIn: "1h",
+    });
+
+    // Send the new JWT to the client
+    res.status(200).json({ token: newToken });
+  } catch (error) {
+    return res.status(400).send("Invalid token");
+  }
+});

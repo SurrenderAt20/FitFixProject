@@ -28,6 +28,7 @@ export const signup = (
     if (!response.ok) {
       dispatch({ type: "SIGNUP_ERROR", payload: data.error });
     } else {
+      localStorage.setItem("copenhagen", data.token);
       dispatch({ type: "SIGNUP_SUCCESS", payload: data });
     }
   };
@@ -51,11 +52,13 @@ export const login = (email, password) => {
     if (!response.ok) {
       dispatch({ type: "LOGIN_ERROR", payload: data.error });
     } else {
-      localStorage.setItem("token", data.token);
-      dispatch({
-        type: "LOGIN_SUCCESS",
-        payload: data,
-      });
+      if (data.token) {
+        localStorage.setItem("copenhagen", data.token);
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: data,
+        });
+      }
     }
   };
 };

@@ -78,6 +78,7 @@ export const Signup = () => {
     }
 
     dispatch(login(userInput.email, userInput.password));
+    navigate("/exercises");
   };
 
   const toggleForm = () => {
