@@ -18,7 +18,6 @@ export const Signup = () => {
   const [formType, setFormType] = useState("signup");
   const navigate = useNavigate();
   const location = useLocation();
-
   const dispatch = useDispatch();
 
   const changeHandler = (event) => {
@@ -77,8 +76,14 @@ export const Signup = () => {
       return;
     }
 
-    dispatch(login(userInput.email, userInput.password));
-    navigate("/exercises");
+    dispatch(login(userInput.email, userInput.password)).then((response) => {
+      if (response.type === "LOGIN_SUCCESS") {
+        localStorage.setItem("jwt", response.payload.token);
+        navigate("/exercises");
+      } else {
+        setError("Invalid email or password");
+      }
+    });
   };
 
   const toggleForm = () => {
