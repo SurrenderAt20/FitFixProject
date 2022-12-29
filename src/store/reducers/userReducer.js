@@ -1,7 +1,17 @@
+import {
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_REQUEST,
+} from "../actions/userActions";
+
 const initialState = {
   loading: false,
-  error: "",
-  isLoggedOut: false,
+  user: null,
+  isLoggedIn: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -17,19 +27,21 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        payload: action.payload,
+        isLoggedIn: true,
       };
     case "SIGNUP_FAILURE":
     case "LOGIN_FAILURE":
       return {
         ...state,
         loading: false,
-        error: action.payload,
+        isLoggedIn: false,
+        error: action.error,
       };
     case "LOGOUT":
       return {
         ...state,
         isLoggedOut: true,
+        user: null,
       };
     default:
       return state;

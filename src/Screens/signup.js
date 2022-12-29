@@ -30,42 +30,50 @@ export const Signup = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Validate user input
     if (userInput.firstname.length < 2) {
       console.log("Character issue");
       setError("Character issue");
       return;
     }
-
     if (userInput.lastname.length < 2) {
       console.log("Character issue");
       setError("Character issue");
       return;
     }
-
     if (userInput.password.length < 8) {
       console.log("Passwords issue");
       setError("Character issue");
       return;
     }
-
     if (userInput.password !== userInput.confirmPassword) {
       console.log("Passwords do not match");
       setError("Passwords do not match");
       return;
     }
 
-    dispatch(
-      signup(
-        userInput.firstname,
-        userInput.lastname,
-        userInput.email,
-        userInput.password,
-        userInput.confirmPassword
-      )
-    );
+    // Send a signup request to the server
+    try {
+      await dispatch(
+        signup(
+          userInput.firstname,
+          userInput.lastname,
+          userInput.email,
+          userInput.password,
+          userInput.confirmPassword
+        )
+      );
+    } catch (error) {
+      console.error("Error signing up: ", error);
+      setError("Error signing up");
+      return;
+    }
+
+    // If the signup request was successful, navigate to the exercises page
+    navigate("/exercises");
   };
 
   const handleLogin = (event) => {

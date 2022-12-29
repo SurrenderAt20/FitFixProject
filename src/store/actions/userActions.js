@@ -1,7 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
 export const signup = (
   firstname,
   lastname,
@@ -30,7 +26,6 @@ export const signup = (
     if (!response.ok) {
       dispatch({ type: "SIGNUP_ERROR", payload: data.error });
     } else {
-      localStorage.setItem("copenhagen", data.token);
       dispatch({ type: "SIGNUP_SUCCESS", payload: data });
     }
   };
@@ -44,7 +39,6 @@ export const login = (email, password) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer <JWT_TOKEN>",
         },
         body: JSON.stringify({
           email: email,
@@ -56,13 +50,10 @@ export const login = (email, password) => {
       if (!response.ok) {
         dispatch({ type: "LOGIN_FAILURE", payload: data.error });
       } else {
-        if (data.token) {
-          localStorage.setItem("copenhagen", data.token);
-          dispatch({
-            type: "LOGIN_SUCCESS",
-            payload: { token: data.token },
-          });
-        }
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: data,
+        });
       }
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE", payload: error.message });
@@ -72,12 +63,17 @@ export const login = (email, password) => {
 
 export const logout = () => {
   return async (dispatch) => {
-    // Remove the JWT token from local storage
-    localStorage.removeItem("jwt");
-
-    // Clear any user data from the store
-    dispatch({
-      type: "LOGOUT",
-    });
+    try {
+      const response = await fetch("http://localhost:3001/logout", {
+        method: "POST",
+      });
+      if (!response.ok) {
+        dispatch({ type: "LOGOUT_FAILURE" });
+      } else {
+        dispatch({ type: "LOGOUT_SUCCESS" });
+      }
+    } catch (error) {
+      dispatch({ type: "LOGOUT_FAILURE", payload: error.message });
+    }
   };
 };

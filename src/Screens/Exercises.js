@@ -1,39 +1,18 @@
 import React from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/actions/userActions";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Exercises = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export const Exercises = ({ req, ...props }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Check if the user has a valid JWT
-    const token = localStorage.getItem("jwt");
-    if (!token) {
-      navigate("/getstarted");
-      return;
-    }
-
-    // Send a request to the '/verify' route to check whether the user is still logged in
-    axios
-      .post(
-        "http://localhost:3001/verify",
-        {},
-        { headers: { authorization: token } }
-      )
-      .then((response) => {
-        // If the user is still logged in, update the JWT in local storage
-        localStorage.setItem("jwt", response.data.token);
-      })
-      .catch((error) => {
-        // If the user is not logged in, navigate to the '/getstarted' page
-        navigate("/getstarted");
-      });
-  }, []);
+  // Check if the user is logged in by checking the session data
+  if (!req.session.user) {
+    // If the user is not logged in, navigate to the '/getstarted' page
+    navigate("/getstarted");
+    return null;
+  }
 
   const handleLogout = () => {
     dispatch(logout());
