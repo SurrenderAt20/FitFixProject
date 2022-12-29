@@ -14,8 +14,17 @@ app.listen(3001, () => {
 });
 
 app.use(express.json());
-
 app.use(cors());
+
+// Set up server-side sessions
+app.use(
+  session({
+    secret: "copenhagen",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
 
 const connection = mysql2.createConnection(connectionDetails);
 
@@ -40,51 +49,43 @@ app.post(
     check("password")
       .isLength({ min: 8 })
       .withMessage("Password must be at least 8 characters long"),
-    check("confirmPassword").custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error("Passwords do not match");
-      }
-      return true;
-    }),
   ],
   async (req, res) => {
-    // Validate the request body
-    console.log(`Password: ${req.body.password}`);
-    console.log(`Confirm Password: ${req.body.confirmPassword}`);
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    // Destructure the request body
     const { firstname, lastname, email, password } = req.body;
 
-    // Hash the password
+    const query = "SELECT *  FROM users WHERE email = ?";
+    const values = [email];
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        console.error("Error checking for an existing email: ", error);
+        return res.status(500).send("Error checking for existing email");
+      }
+      if (results.length > 0) {
+        return res.status(400).send("Email already in use");
+      }
+    });
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Define the query string and values array
-    const query =
-      "INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)";
-    const values = [firstname, lastname, email, hashedPassword];
+    const newUser = { firstname, lastname, email, password: hashedPassword };
 
-    // Execute the query and handle the results
-    connection.query(query, values, (error, result) => {
+    const insertQuery =
+      "INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)";
+    const insertValues = [firstname, lastname, email, hashedPassword];
+    connection.query(insertQuery, insertValues, (error, result) => {
       if (error) {
-        console.error("Error inserting user into database: ", error);
+        console.log("Error inserting user into database ", error);
         return res.status(500).send("Error inserting user into database");
       }
-      console.log("Inserted user into database with ID: ", result.insertId);
 
-      const secretOrPrivateKey = "copenhagen";
+      req.session.user = newUser;
 
-      // Generate a JWT with the user ID as the payload
-      const token = jwt.sign({ userId: result.insertId }, secretOrPrivateKey, {
-        expiresIn: "1h",
-      });
-
-      // Send the JWT to the client
-      res.status(201).json({ token });
+      req.status(201).send("User successfully signed up");
     });
   }
 );
