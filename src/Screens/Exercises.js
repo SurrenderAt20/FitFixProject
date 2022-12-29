@@ -1,11 +1,14 @@
 import React from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { Logout } from "../Components/Logout";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Exercises = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Check if the user has a valid JWT
@@ -32,5 +35,23 @@ export const Exercises = () => {
       });
   }, []);
 
-  return <div>exercises - this site is only for logged in users!</div>;
+  const handleLogout = () => {
+    dispatch(Logout());
+  };
+
+  return (
+    <div>
+      <div className="mt-8 mb-8">
+        <button
+          className="md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+          type="submit"
+          name="submitBtn"
+          onClick={handleLogout}
+        >
+          Log out
+        </button>
+      </div>
+      <div>exercises - this site is only for logged in users!</div>
+    </div>
+  );
 };

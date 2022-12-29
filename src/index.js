@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   user: userReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+export const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

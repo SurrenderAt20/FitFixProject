@@ -4,6 +4,7 @@ const mysql2 = require("mysql2");
 const connectionDetails = require("./database");
 const jwt = require("jsonwebtoken");
 const jwtDecode = require("jwt-decode");
+const session = require("express-session");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const { check, validationResult } = require("express-validator");
@@ -157,6 +158,14 @@ app.post(
   }
 );
 
+app.post("/logout", (req, res) => {
+  // Clear the user's JWT from the session
+  req.session.jwt = null;
+
+  // Send a response indicating that the user has been logged out
+  res.send({ success: true });
+});
+
 app.use("/protected", (req, res, next) => {
   // Check for the presence of a JWT in the Authorization header
   const token = req.headers.authorization;
@@ -183,7 +192,7 @@ app.use("/protected", (req, res, next) => {
 
 app.get("/protected", (req, res) => {
   // The req.user object contains the user information extracted from the JWT
-  res.send(`Welcome, ${req.user.name}`);
+  return res.send(`Welcome, ${req.user.name}`);
 });
 
 app.post("/verify", async (req, res) => {

@@ -1,6 +1,7 @@
 const initialState = {
   loading: false,
   error: "",
+  isLoggedOut: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -16,6 +17,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        payload: action.payload,
       };
     case "SIGNUP_FAILURE":
     case "LOGIN_FAILURE":
@@ -23,6 +25,11 @@ export default function userReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        isLoggedOut: true,
       };
     default:
       return state;

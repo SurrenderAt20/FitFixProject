@@ -1,10 +1,12 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { store } from "../index";
 import { useDispatch } from "react-redux";
 import { signup, login } from "../store/actions/userActions";
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
+import { Logout } from "../Components/Logout";
 
 export const Signup = () => {
   const [userInput, setUserInput] = useState({
@@ -76,14 +78,17 @@ export const Signup = () => {
       return;
     }
 
-    dispatch(login(userInput.email, userInput.password)).then((response) => {
-      if (response.type === "LOGIN_SUCCESS") {
-        localStorage.setItem("jwt", response.payload.token);
-        navigate("/exercises");
-      } else {
-        setError("Invalid email or password");
-      }
-    });
+    dispatch(login(userInput.email, userInput.password));
+    const state = store.getState();
+
+    if (state.loading) {
+      console.log("Loading...");
+    } else if (state.user.error) {
+      console.log("Error: ", state.error);
+    } else {
+      localStorage.setItem("jwt", state.user.payload.token);
+      navigate("/exercises");
+    }
   };
 
   const toggleForm = () => {

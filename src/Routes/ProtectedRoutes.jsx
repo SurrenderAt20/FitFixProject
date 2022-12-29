@@ -1,17 +1,11 @@
 import React from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const useAuth = () => {
-  const user = { loggedIn: false };
-  return user && user.loggedIn;
-};
-
-export const ProtectedRoutes = () => {
-  const location = useLocation();
-  const isAuth = useAuth();
-  return isAuth ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" replace state={{ from: location }} />
-  );
+export const withAuth = (Component) => (props) => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+  return <Component {...props} />;
 };

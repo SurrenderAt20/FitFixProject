@@ -16,9 +16,7 @@ function App() {
         <Route path="/product" element={<Product />} />
         <Route path="/about" element={<About />} />
         <Route path="/community" element={<Community />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/exercises" element={<Exercises />}></Route>
-        </Route>
+        <Route path="/exercises" element={<Exercises />} />
         <Route path="/getstarted" element={<Signup />} />
       </Routes>
     </div>
