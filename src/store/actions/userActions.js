@@ -44,6 +44,7 @@ export const login = (email, password) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer <JWT_TOKEN>",
         },
         body: JSON.stringify({
           email: email,

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { Logout } from "../Components/Logout";
+import { logout } from "../store/actions/userActions";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -36,7 +36,8 @@ export const Exercises = () => {
   }, []);
 
   const handleLogout = () => {
-    dispatch(Logout());
+    dispatch(logout());
+    navigate("/");
   };
 
   return (

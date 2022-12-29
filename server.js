@@ -95,6 +95,7 @@ app.post(
     // Check for the presence of a JWT in the Authorization header
     const token = req.headers.authorization;
     if (!token) {
+      console.log("no token provided");
       return res.status(401).send("Access denied. No token provided.");
     }
 
@@ -104,6 +105,7 @@ app.post(
 
       // Check if the JWT has expired
       if (decoded.exp < Date.now() / 1000) {
+        console.log("expired token");
         return res.status(401).send("Token has expired");
       }
 
@@ -139,12 +141,14 @@ app.post(
         return res.status(500).send("Error fetching user from database");
       }
       if (results.length === 0) {
+        console.error("Error invalid email or pass: ", error);
         return res.status(401).send("Invalid email or password");
       }
 
       // Compare the provided password with the hashed password in the database
       const validPassword = await bcrypt.compare(password, results[0].password);
       if (!validPassword) {
+        console.log("issues comparing hash and pwd");
         return res.status(401).send("Invalid email or password");
       }
 
@@ -164,6 +168,35 @@ app.post("/logout", (req, res) => {
 
   // Send a response indicating that the user has been logged out
   res.send({ success: true });
+});
+
+app.use((req, res, next) => {
+  // Check for the presence of a JWT in the Authorization header
+  const token = req.headers.authorization;
+  if (!token) {
+    console.log("no token provided");
+    return res.status(401).send("Access denied. No token provided.");
+  }
+
+  // Extract the JWT token
+  const bearer = token.split(" ");
+  const bearerToken = bearer[1];
+
+  // Verify the JWT and decode the payload
+  try {
+    const decoded = jwtDecode(bearerToken);
+
+    // Check if the JWT has expired
+    if (decoded.exp < Date.now() / 1000) {
+      console.log("expired token");
+      return res.status(401).send("Token has expired");
+    }
+
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(400).send("Invalid token");
+  }
 });
 
 app.use("/protected", (req, res, next) => {

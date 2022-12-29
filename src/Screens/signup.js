@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { signup, login } from "../store/actions/userActions";
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
-import { Logout } from "../Components/Logout";
 
 export const Signup = () => {
   const [userInput, setUserInput] = useState({
