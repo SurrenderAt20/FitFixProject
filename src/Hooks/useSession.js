@@ -7,7 +7,7 @@ const useSession = (req) => {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const response = await fetch("/api/session", {
+        const response = await fetch("http://localhost:3001/exercises", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

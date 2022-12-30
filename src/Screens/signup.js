@@ -1,7 +1,6 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { store } from "../index";
 import { useDispatch } from "react-redux";
 import { signup, login } from "../store/actions/userActions";
 import { Navigation } from "../Components/Navigation";
@@ -18,7 +17,6 @@ export const Signup = () => {
   const [error, setError] = useState("");
   const [formType, setFormType] = useState("signup");
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
 
   const changeHandler = (event) => {
@@ -76,7 +74,7 @@ export const Signup = () => {
     navigate("/exercises");
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     if (userInput.password.length < 8) {
@@ -85,17 +83,17 @@ export const Signup = () => {
       return;
     }
 
-    dispatch(login(userInput.email, userInput.password));
-    const state = store.getState();
-
-    if (state.loading) {
-      console.log("Loading...");
-    } else if (state.user.error) {
-      console.log("Error: ", state.error);
-    } else {
-      localStorage.setItem("jwt", state.user.payload.token);
-      navigate("/exercises");
+    // Send a signup request to the server
+    try {
+      await dispatch(login(userInput.email, userInput.password));
+    } catch (error) {
+      console.error("Error logging in: ", error);
+      setError("Error logging in");
+      return;
     }
+
+    // If the login request was successful, navigate to the exercises page
+    navigate("/exercises");
   };
 
   const toggleForm = () => {

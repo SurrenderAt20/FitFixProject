@@ -1,13 +1,3 @@
-import {
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_REQUEST,
-} from "../actions/userActions";
-
 const initialState = {
   loading: false,
   user: null,
@@ -40,7 +30,7 @@ export default function userReducer(state = initialState, action) {
     case "LOGOUT":
       return {
         ...state,
-        isLoggedOut: true,
+        isLoggedIn: false,
         user: null,
       };
     default:
