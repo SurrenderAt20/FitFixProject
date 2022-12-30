@@ -7,12 +7,14 @@ import { About } from "./Screens/About";
 import { Community } from "./Screens/Community";
 import { Signup } from "./Screens/Signup";
 import { Profile } from "./Screens/LoggedInScreens/Profile";
+import { News } from "./Screens/LoggedInScreens/News";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Hero />} />
+        <Route path="/news" element={<News />} />
         <Route path="/product" element={<Product />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/exercises" element={<Exercises />} />

@@ -2,27 +2,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function ExerciseList() {
-  const [exerciseData, setExerciseData] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Fetch exercise data from the API
-    axios
-      .get("https://swapi.dev/api/films/")
-      .then((response) => {
-        setExerciseData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []); // The empty array ensures that the effect only runs once
+    axios.get("http://localhost:3001/api/data").then((response) => {
+      setData(response.data);
+    });
+  }, []);
 
   return (
-    <ul>
-      {exerciseData.map((exercise) => (
-        <li key={exercise.id}>
-          {exercise.name}: {exercise.description}
-        </li>
+    <div>
+      {data.map((item) => (
+        <div key={item.id}>
+          <h2>{item.name}</h2>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }

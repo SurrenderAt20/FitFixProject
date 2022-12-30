@@ -1,34 +1,28 @@
 import React from "react";
-import axios from "axios";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../store/actions/userActions";
-import { useNavigate } from "react-router-dom";
 import { LoggedInNav } from "../../Components/LoggedInComponents/LoggedInNav";
-import ExerciseList from "../Api/ExerciseList";
+import { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export const Exercises = ({ req, ...props }) => {
+export const News = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn == true) {
-        navigate("/exercises");
+        navigate("/news");
       } else {
         navigate("/");
       }
     });
   }, []);
-
   return (
     <div>
       <LoggedInNav />
       <div className="mt-8 mb-8"></div>
       <div>
-        <h2 className="text-center">Exercises</h2>
+        <h2 className="text-center">News</h2>
       </div>
-      <ExerciseList />
     </div>
   );
 };

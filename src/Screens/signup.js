@@ -71,7 +71,7 @@ export const Signup = () => {
     }
 
     // If the signup request was successful, navigate to the exercises page
-    navigate("/exercises");
+    navigate("/news");
   };
 
   const handleLogin = async (event) => {
@@ -83,7 +83,7 @@ export const Signup = () => {
       return;
     }
 
-    // Send a signup request to the server
+    // Send a login request to the server
     try {
       await dispatch(login(userInput.email, userInput.password));
     } catch (error) {
@@ -93,7 +93,7 @@ export const Signup = () => {
     }
 
     // If the login request was successful, navigate to the exercises page
-    navigate("/exercises");
+    navigate("/news");
   };
 
   const toggleForm = () => {
