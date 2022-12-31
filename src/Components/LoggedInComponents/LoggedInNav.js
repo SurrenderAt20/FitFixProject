@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/actions/userActions";
 import { useNavigate } from "react-router-dom";
 import logo from "../../Screens/img/GartnerPaint.png";
-import "./LoggedInNav.css";
 
 export const LoggedInNav = () => {
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ export const LoggedInNav = () => {
             <Link to="/about" className="hover:text-darkGrayishBlue">
               About
             </Link>
-            <Link to="/community" className="hover:text-darkGrayishBlue">
+            <Link to="/yourworkout" className="hover:text-darkGrayishBlue">
               Your workout programs
             </Link>
           </div>

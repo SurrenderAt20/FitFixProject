@@ -8,6 +8,7 @@ import { Community } from "./Screens/Community";
 import { Signup } from "./Screens/Signup";
 import { Profile } from "./Screens/LoggedInScreens/Profile";
 import { News } from "./Screens/LoggedInScreens/News";
+import { YourWorkout } from "./Screens/LoggedInScreens/YourWorkout";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route path="/news" element={<News />} />
+        <Route path="/yourworkout" element={<YourWorkout />} />
         <Route path="/product" element={<Product />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/exercises" element={<Exercises />} />

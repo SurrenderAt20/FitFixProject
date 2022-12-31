@@ -10,6 +10,8 @@ import {
   TopElements,
   Button,
 } from "../../Components/StyledComponents/Modal";
+import { AiOutlineClose } from "react-icons/ai";
+import logo from "../img/GartnerPaint.png";
 
 export default function ExerciseList() {
   const [data, setData] = useState([]);
@@ -60,9 +62,12 @@ export default function ExerciseList() {
           <ModalContainer>
             <ModalContent>
               <TopContainer>
-                <HeaderContainer>
+                <HeaderContainer className="p-2">
+                  <img className="img-responsive" src={logo} alt="Logo"></img>
                   <TopElements></TopElements>
-                  <Button onClick={() => setShowModal(false)}>Close</Button>
+                  <a className="p-4" onClick={() => setShowModal(false)}>
+                    <AiOutlineClose />
+                  </a>
                 </HeaderContainer>
               </TopContainer>
               <div className="container flex-row md:flex-row items-center px-6 mx-auto mt-10 space-y-0 md:space-y-0">
