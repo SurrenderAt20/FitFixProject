@@ -35,7 +35,7 @@ export const LoggedInNav = () => {
               About
             </Link>
             <Link to="/community" className="hover:text-darkGrayishBlue">
-              Community
+              Your workout programs
             </Link>
           </div>
           <Link

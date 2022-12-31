@@ -25,9 +25,6 @@ export const Exercises = ({ req, ...props }) => {
     <div>
       <LoggedInNav />
       <div className="mt-8 mb-8"></div>
-      <div>
-        <h2 className="text-center">Exercises</h2>
-      </div>
       <ExerciseList />
     </div>
   );
