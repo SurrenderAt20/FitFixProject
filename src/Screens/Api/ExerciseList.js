@@ -17,6 +17,7 @@ export default function ExerciseList() {
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
+  const [selectedExercises, setSelectedExercises] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:3001/api/data").then((response) => {
@@ -24,24 +25,31 @@ export default function ExerciseList() {
     });
   }, []);
 
+  const handleCheckboxChange = (exercise) => {
+    setSelectedExercises([...selectedExercises, exercise]);
+  };
+
+  const handleSaveWorkout = () => {
+    axios
+      .post("http://localhost:3001/api/saveWorkout", {
+        exercises: selectedExercises,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div>
+      <button
+        className="p-3 px-6 pt-2 mb-4 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+        onClick={handleSaveWorkout}
+      >
+        Save Workout
+      </button>
       <div className="container__container">
         <div className="cards__container">
           {data.map((item) => (
-            <div
-              className="list__item__card"
-              key={item.id}
-              onClick={() => {
-                setShowModal(true);
-                setSelectedItem({
-                  name: item.name,
-                  muscle_category: item.muscle_category,
-                  information: item.information,
-                  instructions: item.instructions,
-                });
-              }}
-            >
+            <div className="list__item__card" key={item.id}>
               <div></div>
               <h3>
                 <b>Name:</b>
@@ -53,6 +61,33 @@ export default function ExerciseList() {
                 <br />
                 {item.muscle_category}
               </h4>
+              <section>
+                <br />
+                <h3>
+                  <b>Add to your workout</b>
+                </h3>
+                <input
+                  onChange={() => handleCheckboxChange(item)}
+                  type="checkbox"
+                />
+              </section>
+              <section>
+                <br />
+                <a
+                  className="md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+                  onClick={() => {
+                    setShowModal(true);
+                    setSelectedItem({
+                      name: item.name,
+                      muscle_category: item.muscle_category,
+                      information: item.information,
+                      instructions: item.instructions,
+                    });
+                  }}
+                >
+                  Read More
+                </a>
+              </section>
             </div>
           ))}
         </div>
