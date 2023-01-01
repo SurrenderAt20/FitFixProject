@@ -28,20 +28,22 @@ export const YourWorkout = () => {
   }, []);
 
   return (
-    <div className="flex flex-row">
+    <div>
       <LoggedInNav />
       {workoutProgram.map((exercise) => (
-        <div className="list__item__card" key={exercise.id}>
-          <h3>
-            <b>Name:</b>
-            <br />
-            {exercise.name}
-          </h3>
-          <h4>
-            <b>Muscle Group:</b>
-            <br />
-            {exercise.muscle_category}
-          </h4>
+        <div className="flex flex-row justify-center">
+          <div className="list__item__card" key={exercise.id}>
+            <h3>
+              <b>Name:</b>
+              <br />
+              {exercise.name}
+            </h3>
+            <h4>
+              <b>Muscle Group:</b>
+              <br />
+              {exercise.muscle_category}
+            </h4>
+          </div>
         </div>
       ))}
     </div>
