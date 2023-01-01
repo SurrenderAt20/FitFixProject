@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import "./YourWorkout.css";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { LoggedInNav } from "../../Components/LoggedInComponents/LoggedInNav";
 
@@ -34,11 +35,22 @@ export const YourWorkout = () => {
     });
   };
 
+  const handleDeleteWorkout = (workoutId) => {
+    // Send a DELETE request to the server to delete the workout with the given id
+    axios.delete(`http://localhost:3001/api/workout/${workoutId}`).then(() => {
+      // After the workout is deleted, update the list of workout programs by re-fetching the data from the server
+      axios
+        .get("http://localhost:3001/api/getWorkout")
+        .then((res) => setWorkoutProgram(res.data))
+        .catch((err) => console.error(err));
+    });
+  };
+
   return (
     <div>
       <LoggedInNav />
-      {workoutProgram.map((exercise) => (
-        <div className="flex justify-center flex-row">
+      <div className="flex flex-row justify-center">
+        {workoutProgram.map((exercise) => (
           <div className="list__item__card" key={exercise.id}>
             <h3>
               <b>Name:</b>
@@ -52,15 +64,26 @@ export const YourWorkout = () => {
             >
               Open
             </button>
+            <button
+              className="p-3 px-6 pt-2 mb-4 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+              onClick={() => handleDeleteWorkout(exercise.id)}
+            >
+              Delete
+            </button>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {selectedWorkout && (
         <div>
-          {JSON.parse(selectedWorkout.exercises).map((exercise) => (
-            <h3 key={exercise.id}>{exercise.name}</h3>
-          ))}
+          <div className="border"></div>
+          <div className="flex flex-row">
+            {JSON.parse(selectedWorkout.exercises).map((exercise) => (
+              <div className="list__item__card" key={exercise.id}>
+                <h3>{exercise.name}</h3>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

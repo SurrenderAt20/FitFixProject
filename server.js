@@ -17,10 +17,11 @@ app.listen(3001, () => {
 app.use(
   cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(expressJSON());
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -225,10 +226,21 @@ app.get("/login", (req, res) => {
   }
 });
 
-app.get("/protected", (req, res) => {
-  if (req.cookies.auth) {
-    // User is authenticated
-  } else {
-    // User is not authenticated
-  }
+//DELETE
+
+app.delete("/api/workout/:id", (req, res) => {
+  const workoutId = req.params.id;
+
+  connection.query(
+    "DELETE FROM workout_programs WHERE id = ?",
+    [workoutId],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
 });
