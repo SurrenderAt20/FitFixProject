@@ -95,6 +95,26 @@ app.post(
   }
 );
 
+app.post("/api/saveWorkout", (req, res) => {
+  const { exercises, name } = req.body;
+  const exerciseString = JSON.stringify(exercises);
+
+  // insert the workout into the database
+  connection.query(
+    "INSERT INTO workout_programs (name, exercises) VALUES (?, ?)",
+    [name, exerciseString],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        res.sendStatus(500);
+      } else {
+        console.log("Workout created!");
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
 app.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -141,7 +161,44 @@ function getData(callback) {
   });
 }
 
+function getWorkout(callback) {
+  connection.query("SELECT * FROM workout_programs", (error, results) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
 //GET
+
+/* app.get("/api/getWorkout", (req, res) => {
+  getWorkout((error, data) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.send(data);
+    }
+  });
+}); */
+
+app.get("/api/getWorkout", (req, res) => {
+  connection.query("SELECT * FROM workout_programs", (error, results) => {
+    if (error) {
+      console.error(error);
+      res.sendStatus(500);
+    } else {
+      const workouts = results.map((workout) => {
+        return {
+          ...workout,
+          exercises: JSON.parse(workout.exercises),
+        };
+      });
+      res.send(workouts);
+    }
+  });
+});
 
 app.get("/api/data", (req, res) => {
   getData((error, data) => {

@@ -8,7 +8,7 @@ import { LoggedInNav } from "../../Components/LoggedInComponents/LoggedInNav";
 export const YourWorkout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const workout = JSON.parse(localStorage.getItem("selectedExercises"));
+  const [workoutProgram, setWorkoutProgram] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:3001/login").then((response) => {
@@ -23,14 +23,14 @@ export const YourWorkout = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/getWorkout")
-      .then((res) => setSelectedExercises(res.data))
+      .then((res) => setWorkoutProgram(res.data))
       .catch((err) => console.error(err));
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-row">
       <LoggedInNav />
-      {workout.map((exercise) => (
+      {workoutProgram.map((exercise) => (
         <div className="list__item__card" key={exercise.id}>
           <h3>
             <b>Name:</b>

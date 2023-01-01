@@ -18,6 +18,7 @@ export default function ExerciseList() {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const [selectedExercises, setSelectedExercises] = useState([]);
+  const [workoutName, setWorkoutName] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:3001/api/data").then((response) => {
@@ -33,6 +34,7 @@ export default function ExerciseList() {
     axios
       .post("http://localhost:3001/api/saveWorkout", {
         exercises: selectedExercises,
+        name: workoutName,
       })
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
@@ -40,12 +42,25 @@ export default function ExerciseList() {
 
   return (
     <div>
-      <button
-        className="p-3 px-6 pt-2 mb-4 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
-        onClick={handleSaveWorkout}
-      >
-        Save Workout
-      </button>
+      <div className="flex flex-row items-center justify-center m-4 p-4">
+        <button
+          className="p-3 px-6 pt-2 mb-4 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+          onClick={handleSaveWorkout}
+        >
+          Save Workout
+        </button>
+        <form className="m-4 mt-2 mb-5">
+          <label htmlFor="workout-name"></label>
+          <input
+            className="border-2 ml-2 p-2 rounded"
+            type="text"
+            id="workout-name"
+            placeholder="set program name"
+            value={workoutName}
+            onChange={(event) => setWorkoutName(event.target.value)}
+          />
+        </form>
+      </div>
       <div className="container__container">
         <div className="cards__container">
           {data.map((item) => (
