@@ -28,7 +28,7 @@ export const YourWorkout = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  const handleWorkoutSelection = (workoutID) => {
+  const handleWorkoutSelection = (workoutId) => {
     axios.get(`http://localhost:3001/api/workout/${workoutId}`).then((res) => {
       setSelectedWorkout(res.data);
     });
@@ -38,8 +38,8 @@ export const YourWorkout = () => {
     <div>
       <LoggedInNav />
       {workoutProgram.map((exercise) => (
-        <div className="flex justify-center">
-          <div className="list__item__card flex flex-row" key={exercise.id}>
+        <div className="flex justify-center flex-row">
+          <div className="list__item__card" key={exercise.id}>
             <h3>
               <b>Name:</b>
               <br />
@@ -48,7 +48,7 @@ export const YourWorkout = () => {
             <br />
             <button
               className="p-3 px-6 pt-2 mb-4 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
-              onClick={handleWorkoutSelection}
+              onClick={handleWorkoutSelection(exercise.id)}
             >
               Open
             </button>
@@ -57,9 +57,9 @@ export const YourWorkout = () => {
       ))}
 
       {selectedWorkout && (
-        <div key={exercise.id}>
+        <div>
           {JSON.parse(selectedWorkout.exercises).map((exercise) => (
-            <h3>{exercise.name}</h3>
+            <h3 key={exercise.id}>{exercise.name}</h3>
           ))}
         </div>
       )}

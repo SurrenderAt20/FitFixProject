@@ -173,15 +173,22 @@ function getWorkout(callback) {
 
 //GET
 
-/* app.get("/api/getWorkout", (req, res) => {
-  getWorkout((error, data) => {
-    if (error) {
-      res.status(500).send(error);
-    } else {
-      res.send(data);
+app.get("/api/workout/:id", (req, res) => {
+  const workoutId = req.params.id;
+
+  connection.query(
+    "SELECT * FROM workout_programs WHERE id = ?",
+    [workoutId],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        res.sendStatus(500);
+      } else {
+        res.send(results[0]);
+      }
     }
-  });
-}); */
+  );
+});
 
 app.get("/api/getWorkout", (req, res) => {
   connection.query("SELECT * FROM workout_programs", (error, results) => {
