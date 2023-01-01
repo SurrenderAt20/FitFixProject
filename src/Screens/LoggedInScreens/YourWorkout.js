@@ -27,7 +27,7 @@ export const YourWorkout = () => {
       .get("http://localhost:3001/api/getWorkout")
       .then((res) => setWorkoutProgram(res.data))
       .catch((err) => console.error(err));
-  }, []);
+  }, [selectedWorkout]);
 
   const handleWorkoutSelection = (workoutId) => {
     axios.get(`http://localhost:3001/api/workout/${workoutId}`).then((res) => {
@@ -36,9 +36,7 @@ export const YourWorkout = () => {
   };
 
   const handleDeleteWorkout = (workoutId) => {
-    // Send a DELETE request to the server to delete the workout with the given id
     axios.delete(`http://localhost:3001/api/workout/${workoutId}`).then(() => {
-      // After the workout is deleted, update the list of workout programs by re-fetching the data from the server
       axios
         .get("http://localhost:3001/api/getWorkout")
         .then((res) => setWorkoutProgram(res.data))
