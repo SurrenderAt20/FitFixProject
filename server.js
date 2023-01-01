@@ -150,6 +150,29 @@ app.post("/logout", (req, res) => {
   res.clearCookie("auth");
 });
 
+app.post("/api/updateProfile", (req, res) => {
+  const { newFirstname, newLastname, newEmail, newPassword } = req.body;
+
+  // Validate input data
+  if (!newFirstname || !newLastname || !newEmail || !newPassword) {
+    return res.status(400).send({ message: "Missing required fields" });
+  }
+
+  // Update the user's profile in the database
+  connection.query(
+    "UPDATE users SET newFirstname= ?, newLastname = ?, newEmail = ?, newPassword = ? WHERE id = ?",
+    [newFirstname, newLastname, newEmail, newPassword],
+    (error, results) => {
+      if (error) {
+        console.error(error);
+        return res.sendStatus(500);
+      } else {
+        return res.send({ message: "Profile updated successfully" });
+      }
+    }
+  );
+});
+
 //Function
 
 function getData(callback) {

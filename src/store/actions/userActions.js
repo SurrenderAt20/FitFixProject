@@ -1,4 +1,5 @@
 import axios from "axios";
+import { first } from "rxjs";
 
 axios.defaults.withCredentials = true;
 export const signup = (
@@ -49,6 +50,28 @@ export const logout = () => {
       dispatch({ type: "LOGOUT_SUCCESS" });
     } catch (error) {
       dispatch({ type: "LOGOUT_FAILURE", payload: error.message });
+    }
+  };
+};
+
+export const updateProfile = (firstname, lastname, email, password) => {
+  return async (dispatch) => {
+    dispatch({ type: "UPDATE_REQUEST" });
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/updateProfile",
+        {
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          password: password,
+        }
+      );
+
+      const data = response.data;
+      dispatch({ type: "UPDATE_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "UPDATE_FAILURE", payload: error.message });
     }
   };
 };

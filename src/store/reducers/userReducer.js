@@ -2,6 +2,7 @@ const initialState = {
   loading: false,
   user: null,
   isLoggedIn: false,
+  updatedProfile: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -32,6 +33,28 @@ export default function userReducer(state = initialState, action) {
         ...state,
         isLoggedIn: false,
         user: null,
+      };
+    case "UPDATE_REQUEST":
+      return {
+        ...state,
+        isLoggedIn: true,
+        loading: true,
+        profile: action.payload,
+        updatedProfile: false,
+      };
+    case "UPDATE_SUCCESS":
+      return {
+        ...state,
+        isLoggedIn: true,
+        loading: false,
+        updatedProfile: true,
+      };
+    case "UPDATE_FAILURE":
+      return {
+        ...state,
+        isLoggedIn: true,
+        loading: false,
+        updatedProfile: false,
       };
     default:
       return state;
