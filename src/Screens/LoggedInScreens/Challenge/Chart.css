@@ -1,0 +1,39 @@
+.chart {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 400px;
+    width: 500px;
+    border-radius: 5px;
+    margin-bottom: 4rem;
+    border: 1px solid black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+  }
+  
+  .chart__bar {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    position: relative;
+    height: 100%;
+  }
+  
+  .chart__bar-value {
+    background-color: hsl(12, 88%, 59%);
+    height: 0;
+    width: 100%;
+    padding: 1rem;
+    transition: height 0.2s;
+  }
+  
+  .chart__bar-label {
+    position: absolute;
+    top: -20px;
+    left: 0;
+  }
+
+  
+  
