@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const Player = ({ id, name, color, initialScore }) => {
   const [score, setScore] = useState(initialScore);
@@ -10,6 +10,16 @@ export const Player = ({ id, name, color, initialScore }) => {
   const decrementScore = () => {
     setScore(score - 1);
   };
+
+  useEffect(() => {
+    // Save score to local storage when the component updates
+    const storedScores = localStorage.getItem("scores");
+    if (storedScores) {
+      const scoresArray = JSON.parse(storedScores);
+      scoresArray[id] = score;
+      localStorage.setItem("scores", JSON.stringify(scoresArray));
+    }
+  }, [score]);
 
   return (
     <div

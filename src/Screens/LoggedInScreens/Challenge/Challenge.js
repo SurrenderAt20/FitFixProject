@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Player } from "./Player";
 import { Chart } from "./Chart.js";
 import { LoggedInNav } from "../../../Components/LoggedInComponents/LoggedInNav";
@@ -8,18 +8,41 @@ export const Challenge = () => {
   const [scores, setScores] = useState([]);
   const inputRef = useRef();
 
+  useEffect(() => {
+    // Retrieve scores from local storage when the component mounts
+    const storedScores = localStorage.getItem("scores");
+    const storedPlayers = localStorage.getItem("players");
+
+    if (storedScores && storedPlayers) {
+      setScores(JSON.parse(storedScores));
+      setPlayers(JSON.parse(storedPlayers));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save scores to local storage when the component updates
+    localStorage.setItem("scores", JSON.stringify(scores));
+    localStorage.setItem("players", JSON.stringify(players));
+  }, [scores, players]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newPlayer = inputRef.current.value;
+    const storedScores = localStorage.getItem("scores");
+    setPlayers([...players, newPlayer]);
+    setScores([...scores, storedScores ? storedScores[players.length] : 0]);
+    inputRef.current.value = "";
+    /*     event.preventDefault();
+    const newPlayer = inputRef.current.value;
     setPlayers([...players, newPlayer]);
     setScores([...scores, 0]); // initialize score for new player
-    inputRef.current.value = "";
+    inputRef.current.value = ""; */
   };
 
   return (
     <div text-2xl font-bold mb-4>
       <LoggedInNav />
-      <h2>The challenge</h2>
+      <div className="mt-8"></div>
       <div className="challenge flex flex-wrap justify-between">
         <form onSubmit={handleSubmit} className="w-full md:w-1/3 p-4">
           <input
@@ -41,7 +64,7 @@ export const Challenge = () => {
               name={player}
               key={player}
               color="#000"
-              initialScore={0}
+              initialScore={scores[index]}
               onScoreChange={(score) => {
                 const newScores = [...scores];
                 newScores[index] = score;
@@ -50,7 +73,9 @@ export const Challenge = () => {
             />
           ))}
         </div>
-        {/* <Chart players={players} scores={scores} /> */}
+        <div className="container flex-row md:flex-row items-center px-6 mx-auto mt-10 space-y-0 md:space-y-0">
+          <Chart players={players} scores={scores} />
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,21 @@
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { useRef, useEffect } from "react";
+
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 export const Chart = ({ players, scores }) => {
   const chartRef = useRef();
 
   const data = {
-    labels: players,
+    labels: players.map((player) => player.name),
     datasets: [
       {
         label: "Score",
@@ -34,19 +44,24 @@ export const Chart = ({ players, scores }) => {
   return (
     <div>
       <Bar
+        className="w-max items-center"
         data={data}
         options={{
           scales: {
-            yAxes: [
-              {
-                ticks: {
-                  min: 0,
-                },
-              },
-            ],
+            y: {
+              beginAtZero: true,
+            },
           },
         }}
       />
     </div>
   );
 };
+
+/* [
+    {
+      ticks: {
+        min: 0,
+      },
+    },
+  ], */
