@@ -151,17 +151,18 @@ app.post("/logout", (req, res) => {
 });
 
 app.post("/api/updateProfile", (req, res) => {
-  const { newFirstname, newLastname, newEmail, newPassword } = req.body;
+  const { firstname, lastname, email, password } = req.body;
+  const userId = req.user.id; // Assume that req.user contains the authenticated user's information
 
   // Validate input data
-  if (!newFirstname || !newLastname || !newEmail || !newPassword) {
+  if (!firstname || !lastname || !email || !password) {
     return res.status(400).send({ message: "Missing required fields" });
   }
 
   // Update the user's profile in the database
   connection.query(
-    "UPDATE users SET newFirstname= ?, newLastname = ?, newEmail = ?, newPassword = ? WHERE id = ?",
-    [newFirstname, newLastname, newEmail, newPassword],
+    "UPDATE users SET firstname = ?, lastname = ?, email = ?, password = ? WHERE id = ?",
+    [firstname, lastname, email, password, userId],
     (error, results) => {
       if (error) {
         console.error(error);
