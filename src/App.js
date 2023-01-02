@@ -9,6 +9,7 @@ import { Signup } from "./Screens/Signup";
 import { Profile } from "./Screens/LoggedInScreens/Profile";
 import { News } from "./Screens/LoggedInScreens/News";
 import { YourWorkout } from "./Screens/LoggedInScreens/YourWorkout";
+import { Challenge } from "./Screens/LoggedInScreens/Challenge/Challenge";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Hero />} />
         <Route path="/news" element={<News />} />
         <Route path="/yourworkout" element={<YourWorkout />} />
+        <Route path="/challenges" element={<Challenge />} />
         <Route path="/product" element={<Product />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/exercises" element={<Exercises />} />

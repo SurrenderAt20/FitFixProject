@@ -30,8 +30,8 @@ export const LoggedInNav = () => {
             <Link to="/profile" className="hover:text-darkGrayishBlue">
               Profile
             </Link>
-            <Link to="/about" className="hover:text-darkGrayishBlue">
-              About
+            <Link to="/challenges" className="hover:text-darkGrayishBlue">
+              Challenges
             </Link>
             <Link to="/yourworkout" className="hover:text-darkGrayishBlue">
               Your workout programs
