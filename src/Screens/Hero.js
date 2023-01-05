@@ -1,5 +1,5 @@
 import React from "react";
-import illustrationintro from "./img/illustration-intro.svg";
+import muscle from "./img/muscle1.png";
 import anna from "./img/anna.svg";
 import victor from "./img/victor.svg";
 import myAvatar from "./img/myAvatar.svg";
@@ -31,7 +31,7 @@ export const Hero = () => {
             </div>
           </div>
           <div className="md:w-1/2">
-            <img src={illustrationintro} alt="illustrationintro"></img>
+            <img src={muscle} alt="illustrationintro"></img>
           </div>
         </div>
       </section>
