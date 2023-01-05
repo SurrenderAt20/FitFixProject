@@ -5,6 +5,7 @@ import victor from "./img/victor.svg";
 import myAvatar from "./img/myAvatar.svg";
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
+import "./fonts/fonts.css";
 
 export const Hero = () => {
   return (

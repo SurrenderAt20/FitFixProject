@@ -31,7 +31,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background: #f1f1f1;
+  background: #050f1e;
   border-radius: 20px;
   width: 50%;
   height: 85%;

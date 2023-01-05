@@ -122,22 +122,22 @@ export default function ExerciseList() {
               </TopContainer>
               <div className="container flex-row md:flex-row items-center px-6 mx-auto mt-10 space-y-0 md:space-y-0">
                 <div className="flex md:items-center flex-col mb-28 space-y-12">
-                  <h2 className="max-w-md text-4xl font-bold text-headlineDark text-center md:text-5xl md:text-center">
+                  <h2 className="max-w-md text-4xl font-bold text-white text-center md:text-5xl md:text-center">
                     {selectedItem.name}
                   </h2>
-                  <h3>
+                  <h3 className="text-white">
                     <b>Muscle Group:</b>
                     <br />
                     {selectedItem.muscle_category}
                   </h3>
-                  <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-                    <h3 className="text-headlineDark">
+                  <p className="max-w-sm text-center text-white md:text-left">
+                    <h3 className="text-white">
                       <b>Information:</b>
                     </h3>
                     {selectedItem.information}
                   </p>
-                  <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-                    <h3 className="text-headlineDark">
+                  <p className="max-w-sm text-center text-white md:text-left">
+                    <h3 className="text-white">
                       <b>instructions:</b>
                     </h3>
                     {selectedItem.instructions}
