@@ -48,7 +48,7 @@ export const Footer = () => {
                 About
               </a>
             </div>
-            <div class="flex flex-col space-y-3 text-white">
+            {/*             <div class="flex flex-col space-y-3 text-white">
               <a href="#" class="hover:text-brightRed">
                 Careers
               </a>
@@ -58,7 +58,7 @@ export const Footer = () => {
               <a href="#" class="hover:text-brightRed">
                 Privacy Policy
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* <div class="flex flex-col justify-between"></div> */}
