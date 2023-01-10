@@ -13,15 +13,17 @@ export const Community = () => {
               The community growth is about much more than you and me
             </h1>
             <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-              FitFix is a platform which makes workouts easier than ever before.
-              Make your program and go to work with your friends.
+              It is about creating the perfect platform for everybody to create
+              where it is possible to share tips, tricks, find workout partners
+              and much more. As a first we are live on a discord server but aim
+              to create our very own intra.
             </p>
             <div className="flex justify-center md:justify-start">
               <a
-                href=""
+                href="https://discord.gg/w5MjRe7s"
                 className="p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
               >
-                Get Started
+                Check the Discord
               </a>
             </div>
           </div>

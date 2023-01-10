@@ -13,8 +13,10 @@ export const Product = () => {
               Our mission is much more than a fitness application
             </h1>
             <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-              FitFix is a platform which makes workouts easier than ever before.
-              Make your program and go to work with your friends.
+              We aim to provide you with a fitness application available for
+              free to anyone. We launch as a simple web application but strive
+              to evolve to a progressive web application available for all
+              devices and in offline mode
             </p>
             <div className="flex justify-center md:justify-start">
               <a

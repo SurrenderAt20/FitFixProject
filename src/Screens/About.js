@@ -13,8 +13,19 @@ export const About = () => {
               A history about a hole in the fitness industry
             </h1>
             <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
-              FitFix is a platform which makes workouts easier than ever before.
-              Make your program and go to work with your friends.
+              Once upon a time there was a ton of fitness applications. You
+              could assemble a program but it was a messed up design, bombarded
+              with commercials or locked behind a paywall. Neither could you do
+              anything other than createa a program.
+              <br />
+              <br />
+              Not anymore - We are here to create the complete package and give
+              it to you. FOR FREE.
+              <br />
+              <br />
+              While this is only a beta version we aim to deliver a complete
+              option. A community where people can find partners, create workout
+              programs, stay connected.
             </p>
             <div className="flex justify-center md:justify-start">
               <a

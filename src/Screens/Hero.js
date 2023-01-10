@@ -56,7 +56,7 @@ export const Hero = () => {
                     01
                   </div>
                   <h3 class="text-base font-bold md:mb-4 md:hidden text-headlineDark">
-                    Track company-wide progress
+                    Track Fitness Progress
                   </h3>
                 </div>
               </div>
@@ -66,9 +66,8 @@ export const Hero = () => {
                   Track fitness progress
                 </h3>
                 <p class="text-darkGrayishBlue">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  Track your fitness progress by adjusting repititions, weight
+                  and more! <b>This Feature is still under development</b>
                 </p>
               </div>
             </div>
@@ -80,19 +79,19 @@ export const Hero = () => {
                     02
                   </div>
                   <h3 class="text-base text-headlineDark font-bold md:mb-4 md:hidden">
-                    Advanced fitness programs
+                    Challenge your friends
                   </h3>
                 </div>
               </div>
 
               <div>
                 <h3 class="hidden mb-4 text-lg text-headlineDark font-bold md:block">
-                  Social constructions
+                  Challenge your friends
                 </h3>
                 <p class="text-darkGrayishBlue">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  We aim to provide great options in order for you and your
+                  friends to inspire eachother. Let your inner competitive
+                  sports guy lose and start now
                 </p>
               </div>
             </div>
@@ -104,19 +103,18 @@ export const Hero = () => {
                     03
                   </div>
                   <h3 class="text-base text-headlineDark font-bold md:mb-4 md:hidden">
-                    Advanced fitness programs
+                    Create advanced fitness programs
                   </h3>
                 </div>
               </div>
 
               <div>
                 <h3 class="hidden mb-4 text-lg text-headlineDark font-bold md:block">
-                  Advanced fitness programs
+                  Create advanced fitness programs
                 </h3>
                 <p class="text-darkGrayishBlue">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  With a huge catalog of exercises you'll be able to create the
+                  perfect program suited just to your needs.
                 </p>
               </div>
             </div>
@@ -135,27 +133,30 @@ export const Hero = () => {
                 <img src={myAvatar} class="w-16 -mt-14" alt="" />
                 <h5 class="text-lg font-bold">Anna</h5>
                 <p class="text-sm text-darkGrayishBlue">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  I spend two years in the army as a military constable. When I
+                  stopped I carried on exercising in a gym. The application
+                  provided by fitness world wasn't significant and I therefore
+                  limited my exercise program
                 </p>
               </div>
               <div class="hidden flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:flex md:w-1/3">
                 <img src={anna} class="w-16 -mt-14" alt="" />
                 <h5 class="text-lg font-bold">Rikke</h5>
                 <p class="text-sm text-darkGrayishBlue">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  Most of my life I have prefered to workout alone but my local
+                  gym never did anything to create social incentives either. I
+                  am ready and I want to be a bigger part of the fitness
+                  community
                 </p>
               </div>
               <div class="hidden flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:flex md:w-1/3">
                 <img src={victor} class="w-16 -mt-14" alt="" />
                 <h5 class="text-lg font-bold">Mads</h5>
                 <p class="text-sm text-darkGrayishBlue">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  Juggling between a social life and studies can be tough. I
+                  moved to Copenhagen for studies but didn't have a social
+                  network. I do fitness. A lot. Better social options would be
+                  something I think I enjoyed
                 </p>
               </div>
             </div>
