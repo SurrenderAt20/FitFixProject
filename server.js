@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const expressJSON = require("express-json");
 const session = require("express-session");
+const jwt = require("jsonwebtoken");
 
 app.listen(3001, () => {
   console.log("Server is listening on port 3001");
