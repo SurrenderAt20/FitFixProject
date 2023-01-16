@@ -29,12 +29,12 @@ export const Challenge = () => {
     const storedScores = localStorage.getItem("scores");
     setPlayers([...players, newPlayer]);
     let newScore = 0;
-if(storedScores){
-  newScore = JSON.parse(storedScores)[players.length] || 0;
-}
-setScores([...scores, newScore])
+    if (storedScores) {
+      newScore = JSON.parse(storedScores)[players.length] || 0;
+    }
+    setScores([...scores, newScore]);
 
-/*     setScores([
+    /*     setScores([
       ...scores,
       storedScores ? parseInt(JSON.parse(storedScores)[players.length]) : 0,
     ]); */
@@ -66,7 +66,13 @@ setScores([...scores, newScore])
   return (
     <div text-2xl font-bold mb-4>
       <LoggedInNav />
-      <div className="mt-8"></div>
+      <div className="mt-8">
+        <div className="flex md:items-center flex-col mb-28 space-y-12">
+          <h1 className="max-w-md text-4xl font-bold text-headlineDark text-center md:text-5xl md:text-center">
+            First to 40 Workout Challenge
+          </h1>
+        </div>
+      </div>
       <div className="challenge flex flex-wrap justify-between">
         <form onSubmit={handleSubmit} className="w-full mt-4 md:w-1/3 p-4">
           <input
@@ -81,7 +87,7 @@ setScores([...scores, newScore])
             Add Player
           </button>
         </form>
-        <div className="w-full md:w-2/3 p-4"> 
+        <div className="w-full md:w-2/3 p-4">
           {players.map((player, index) => (
             <Player
               id={index}
