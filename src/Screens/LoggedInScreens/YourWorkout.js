@@ -11,6 +11,7 @@ export const YourWorkout = () => {
   const dispatch = useDispatch();
   const [workoutProgram, setWorkoutProgram] = useState([]);
   const [selectedWorkout, setSelectedWorkout] = useState(null);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     axios.get("http://localhost:3001/login").then((response) => {
@@ -25,9 +26,10 @@ export const YourWorkout = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/getWorkout")
-      .then((res) => setWorkoutProgram(res.data))
+      .then((res) => {setWorkoutProgram(res.data)
+      setIsLoading(false)})
       .catch((err) => console.error(err));
-  }, [selectedWorkout]);
+  }, []);
 
   const handleWorkoutSelection = (workoutId) => {
     axios.get(`http://localhost:3001/api/workout/${workoutId}`).then((res) => {
@@ -58,7 +60,7 @@ export const YourWorkout = () => {
             <br />
             <button
               className="p-3 px-6 pt-2 mb-4 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
-              onClick={handleWorkoutSelection(exercise.id)}
+              onClick={() => handleWorkoutSelection(exercise.id)}
             >
               Open
             </button>
