@@ -28,10 +28,16 @@ export const Challenge = () => {
     const newPlayer = inputRef.current.value;
     const storedScores = localStorage.getItem("scores");
     setPlayers([...players, newPlayer]);
-    setScores([
+    let newScore = 0;
+if(storedScores){
+  newScore = JSON.parse(storedScores)[players.length] || 0;
+}
+setScores([...scores, newScore])
+
+/*     setScores([
       ...scores,
       storedScores ? parseInt(JSON.parse(storedScores)[players.length]) : 0,
-    ]);
+    ]); */
     inputRef.current.value = "";
   };
 
@@ -75,7 +81,7 @@ export const Challenge = () => {
             Add Player
           </button>
         </form>
-        <div className="w-full md:w-2/3 p-4">
+        <div className="w-full md:w-2/3 p-4"> 
           {players.map((player, index) => (
             <Player
               id={index}
