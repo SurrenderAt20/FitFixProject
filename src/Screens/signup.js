@@ -15,14 +15,54 @@ export const Signup = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const [firstnameError, setFirstnameError] = useState(false)
+  const [lastnameError, setLastnameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [formType, setFormType] = useState("signup");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  function validateEmail(email) {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(email);
+  }
+  
   const changeHandler = (event) => {
     setUserInput((prevState) => {
       const inputValue = event.target.value;
       const inputName = event.target.name;
+
+      if (inputName === "firstname" && inputValue.length < 2) {
+        setFirstnameError(true);
+      } else {
+        setFirstnameError(false);
+      }
+
+      if (inputName === "lastname" && inputValue.length < 2) {
+        setLastnameError(true);
+      } else {
+        setLastnameError(false);
+      }
+  
+      if (inputName === "email" && !validateEmail(inputValue)) {
+        setEmailError(true);
+      } else {
+        setEmailError(false);
+      }
+  
+      if (inputName === "password" && inputValue.length < 8) {
+        setPasswordError(true);
+      } else {
+        setPasswordError(false);
+      }
+  
+      if (inputName === "confirmPassword" && inputValue !== userInput.password) {
+        setConfirmPasswordError(true);
+      } else {
+        setConfirmPasswordError(false);
+      }
 
       return { ...prevState, [inputName]: inputValue };
     });
@@ -123,9 +163,9 @@ export const Signup = () => {
               onSubmit={handleSubmit}
               className="flex flex-col w-full max-w-md mb-28 mx-auto xl:mx-auto xl:mr-40"
             >
-              <div className="flex items-center border-b border-gray-500 py-2">
+              <div className={`flex items-center border-b border-gray-500 py-2 ${firstnameError ? "border-red-500 border-bold" : ""}`}>
                 <input
-                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  className={`appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none`}
                   type="text"
                   value={userInput.firstname}
                   placeholder="First Name"
@@ -134,7 +174,7 @@ export const Signup = () => {
                   aria-label="First Name"
                 />
               </div>
-              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+              <div className={`flex items-center border-b border-gray-500 py-2 mt-8 ${lastnameError ? "border-red-500 border-bold" : ""}`}>
                 <input
                   className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                   type="text"
@@ -145,9 +185,9 @@ export const Signup = () => {
                   aria-label="Last Name"
                 />
               </div>
-              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+              <div className={`flex items-center border-b border-gray-500 py-2 mt-8 ${emailError ? "border-red-500 border-bold" : ""}`}>
                 <input
-                  className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                  className={`appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none ${emailError ? "border-red-500" : ""}`}
                   type="email"
                   value={userInput.email}
                   onChange={changeHandler}
@@ -156,7 +196,7 @@ export const Signup = () => {
                   aria-label="Email Address"
                 />
               </div>
-              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+              <div className={`flex items-center border-b border-gray-500 py-2 mt-8 ${passwordError ? "border-red-500 border-bold" : ""}`}>
                 <input
                   className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                   type="password"
@@ -167,7 +207,7 @@ export const Signup = () => {
                   aria-label="Password"
                 />
               </div>
-              <div className="flex items-center border-b border-gray-500 py-2 mt-8">
+              <div className={`flex items-center border-b border-gray-500 py-2 mt-8 ${confirmPasswordError ? "border-red-500 border-bold" : ""}`}>
                 <input
                   className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
                   type="password"
