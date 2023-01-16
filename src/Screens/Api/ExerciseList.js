@@ -37,6 +37,7 @@ export default function ExerciseList() {
         name: workoutName,
       })
       .then((res) => console.log(res))
+      .then(setWorkoutName(""))
       .catch((err) => console.error(err));
   };
 
