@@ -9,7 +9,6 @@
     margin-bottom: 4rem;
     border: 1px solid black;
     position: relative;
-    /* position: absolute; */
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
